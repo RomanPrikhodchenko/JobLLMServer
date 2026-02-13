@@ -1,0 +1,95 @@
+model_list:
+  - model_name: qwen2.5-0.5b
+    litellm_params:
+      model: openai/qwen2.5-0.5b
+      api_base: http://vllm:8000/v1
+      api_key: dummy  # vLLM doesn't require authentication
+      stream_timeout: 300
+      max_retries: 3
+    model_info:
+      mode: chat
+      input_cost_per_token: 0.00001
+      output_cost_per_token: 0.00002
+      max_tokens: 32768
+
+litellm_settings:
+  # Budget Management
+  budget_manager: true
+
+  # Default limits for new API keys (can be overridden per key)
+  default_max_budget: 100.0  # USD
+  default_budget_duration: "30d"  # 30 days
+  default_tpm_limit: 10000  # tokens per minute
+  default_rpm_limit: 100    # requests per minute
+
+  # Rate limiting window
+  redis_host: null  # Use in-memory if redis not available
+  redis_port: null
+
+  # Timeouts
+  request_timeout: 600
+
+  # Retry logic
+  num_retries: 3
+  retry_after: 0
+
+  # Fallback models (optional)
+  fallbacks: []
+
+  # Enable detailed logging (uncomment to enable langfuse)
+  # success_callback: ["langfuse"]
+  # failure_callback: ["langfuse"]
+
+  # Drop unknown params instead of failing
+  drop_params: true
+
+  # Enable streaming
+  stream_response: true
+
+general_settings:
+  # Database connection
+  database_url: os.environ/DATABASE_URL
+  database_connection_pool_limit: 100
+  database_connection_timeout: 60
+
+  # Master key from environment
+  master_key: os.environ/LITELLM_MASTER_KEY
+
+  # UI settings
+  ui_username: os.environ/UI_USERNAME
+  ui_password: os.environ/UI_PASSWORD
+
+  # Enable usage tracking
+  store_model_in_db: true
+
+  # Callbacks for monitoring
+  success_callback: []
+  failure_callback: []
+
+  # Allow parallel requests
+  disable_parallel_requests: false
+
+  # CORS settings (adjust for production)
+  allowed_origins: ["*"]
+
+  # Request logging
+  enable_json_logs: true
+  json_logs_dir: "/app/logs"
+
+  # Admin features
+  use_azure_key_vault: false
+
+  # Health check settings
+  health_check_interval: 60
+
+  # Enable prometheus metrics (optional)
+  # success_callback: ["prometheus"]
+
+# Router settings for load balancing (if using multiple vLLM instances)
+router_settings:
+  routing_strategy: simple-shuffle
+  model_group_alias: {}
+  redis_host: null
+  redis_port: null
+  redis_password: null
+  enable_pre_call_checks: true
