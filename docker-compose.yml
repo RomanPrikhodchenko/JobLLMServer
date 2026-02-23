@@ -41,7 +41,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - F:/vllm-models:/models
+      - /home/vllm1/vllm_models:/models
     deploy:
       resources:
         reservations:
