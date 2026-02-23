@@ -23,7 +23,6 @@ services:
     image: vllm/vllm-openai:latest
     container_name: vllm-server
     restart: unless-stopped
-    runtime: nvidia
     ipc: host
     environment:
       HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN}
