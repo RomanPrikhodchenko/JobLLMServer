@@ -9,6 +9,9 @@
 keys*.txt
 virtual_key*.txt
 
+# SSL Certificates
+config/nginx/certs/
+
 # Data directories
 data/
 data/postgres/
