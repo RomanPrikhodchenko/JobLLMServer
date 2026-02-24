@@ -10,7 +10,7 @@ model_list:
       mode: chat
       input_cost_per_token: 0.00001
       output_cost_per_token: 0.00002
-      max_tokens: 32768
+      max_tokens: 131072
 
 litellm_settings:
   # Budget Management
@@ -61,6 +61,7 @@ general_settings:
 
   # Enable usage tracking
   store_model_in_db: true
+  store_prompts_in_spend_logs: true  
 
   # Callbacks for monitoring
   success_callback: []
